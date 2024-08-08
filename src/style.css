@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+nav ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    padding: 20px;
+}
+header{
+    max-width: 800px;
+    background-color: aliceblue;
+    margin: auto;
+}
+li button{
+    padding: 10px;
+}
+
