@@ -7,22 +7,31 @@ if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");
 }
 
-const tabs = ["about", "menu", "contacts"];
+const tabs = ["О нас", "Меню", "Контакты"];
+const mainTab = 0;
 
 function loadTemplate() {
   const header = document.createElement("header");
+  const subheader = document.createElement("div");
   const nav = document.createElement("nav");
   const ul = document.createElement("ul");
   const container = document.createElement("div");
 
+  header.appendChild(subheader);
   header.appendChild(nav);
   nav.appendChild(ul);
   container.classList.add("container");
+  subheader.textContent = "ПИВЧИК";
 
   tabs.forEach((element) => {
     const li = document.createElement("li");
     const btn = document.createElement("button");
     btn.textContent = element;
+
+    if (element === tabs[mainTab]) {
+      btn.classList.add("active");
+    }
+
     li.appendChild(btn);
     ul.appendChild(li);
   });
@@ -36,22 +45,25 @@ loadTemplate();
 function loadComponent(component) {
   const container = document.querySelector(".container");
   container.innerHTML = "";
-  if (component === "about") {
+  if (component === tabs[0]) {
     loadAbout();
   }
-  if (component === "menu") {
+  if (component === tabs[1]) {
     loadMenu();
   }
-  if (component === "contacts") {
+  if (component === tabs[2]) {
     loadContacts();
   }
 }
 
-const btns = document.querySelectorAll('button')
+const btns = document.querySelectorAll("button");
+
 btns.forEach((btn) => {
-  btn.addEventListener('click', () => {
+  btn.addEventListener("click", (e) => {
+    btns.forEach((btn) => btn.classList.remove("active"));
+    e.target.classList.add("active");
     loadComponent(btn.textContent);
-  })
-})
+  });
+});
 
-
+loadComponent(tabs[mainTab]);
